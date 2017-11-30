@@ -1,0 +1,23 @@
+version: "3"
+services:
+    app:
+        container_name: symfony_app
+        image: symfony_app
+        build:
+            context: docker/app
+        ports:
+            - 80:80
+            - 443:443
+        volumes:
+            - /var/www/var/cache
+            - /var/www/var/logs
+
+    db:
+        image: mysql:5.6
+        ports:
+            - 3307:3306
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: symfony
+            MYSQL_USER: symfony
+            MYSQL_PASSWORD: root

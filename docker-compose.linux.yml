@@ -1,0 +1,10 @@
+# =====================================
+#
+# Overrides docker-compose.yml to define Docker Sync volume for Mac users
+#
+# =====================================
+version: "3"
+services:
+    app:
+        volumes:
+            - ./app:/var/www

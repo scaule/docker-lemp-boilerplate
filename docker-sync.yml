@@ -1,0 +1,10 @@
+version: "2"
+
+options:
+  compose-file-path: './docker-compose.yml'
+  compose-dev-file-path: './docker-compose.mac.yml'
+  verbose: false
+syncs:
+  app-sf-sync:
+    src: 'app/.'
+    sync_excludes: ['.git', '.idea']
