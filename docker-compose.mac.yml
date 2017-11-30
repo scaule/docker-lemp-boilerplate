@@ -8,6 +8,8 @@ services:
     app:
         volumes:
             - app-sf-sync:/var/www:nocopy
+            - /var/www/var/cache
+            - /var/www/var/logs
 volumes:
     app-sf-sync:
         external: true

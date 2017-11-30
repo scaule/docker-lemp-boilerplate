@@ -8,9 +8,6 @@ services:
         ports:
             - 80:80
             - 443:443
-        volumes:
-            - /var/www/var/cache
-            - /var/www/var/logs
 
     db:
         image: mysql:5.6
