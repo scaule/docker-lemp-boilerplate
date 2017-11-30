@@ -20,7 +20,7 @@ chmod a+x init-docker.sh && ./init-docker.sh
 ## Hosts
 
 Add in your hosts file:
-
+```
 127.0.0.1 local.symfony.fr
 ```
 
@@ -28,7 +28,7 @@ Run the docker stack:
 
 For Unix users :
 
-```
+```bash
 docker-compose up
 ```
 
