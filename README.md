@@ -13,10 +13,15 @@ Install Docker for Mac : https://store.docker.com/editions/community/docker-ce-d
 Install Docker Sync : ```gem install docker-sync```
 
 ## Installation
-Execute init script : 
+##Execute init script : 
 ```
 chmod a+x init-docker.sh && ./init-docker.sh
 ```
+
+Copy your project in app folder 
+
+Check nginx config in docker/app/conf/site-available
+
 ## Hosts
 
 Add in your hosts file:
@@ -37,11 +42,3 @@ For Mac users:
 ```bash
 docker-sync-stack start
 ```
-
-
-
-
-
-
-
-[Usefull scripts](scripts/)
