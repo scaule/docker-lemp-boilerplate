@@ -5,7 +5,7 @@
 # =====================================
 version: "3"
 services:
-    app:
+    php-fpm:
         volumes:
             - app-sf-sync:/var/www:nocopy
             - /var/www/var/cache

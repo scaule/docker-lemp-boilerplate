@@ -5,6 +5,6 @@
 # =====================================
 version: "3"
 services:
-    app:
+    php-fpm:
         volumes:
             - ./app:/var/www
