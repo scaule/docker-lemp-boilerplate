@@ -28,6 +28,7 @@ display_options () {
     print_style "   synclogs" "info"; printf "\t\t For mac get synchro logs.\n"
     print_style "   logs" "info"; printf "\t\t Get containers logs\n"
     print_style "   bash" "info"; printf "\t\t Connect to a container\n"
+    print_style "   xdebug enable/disable" "info"; printf "\t\t enable or disable xdebug on php container r\n"
 }
 
 if [[ $# -eq 0 ]] ; then
@@ -104,6 +105,11 @@ elif [ "$1" == "stop" ]; then
         docker-sync stop
     fi
     docker-compose stop
+elif [ "$1" == "xdebug" ]; then
+    # get container names on env
+    export $(egrep -v '^#' .env | xargs)
+
+    chmod a+x docker/scripts/xdebug-$2.sh && ./docker/scripts/xdebug-$2.sh $APPLICATION_NAME"_php" $PHP_VERSION
 else
     print_style "Invalid arguments.\n" "danger"
     display_options
