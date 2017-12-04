@@ -27,7 +27,7 @@ display_options () {
     print_style "   start" "info"; printf "\t\t Installs docker-sync gem on the host machine.\n"
     print_style "   synclogs" "info"; printf "\t\t For mac get synchro logs.\n"
     print_style "   logs" "info"; printf "\t\t Get containers logs\n"
-    print_style "   bash container_name" "info"; printf "\t\t Connect to a container\n"
+    print_style "   bash" "info"; printf "\t\t Connect to a container\n"
 }
 
 if [[ $# -eq 0 ]] ; then
@@ -87,8 +87,17 @@ elif [ "$1" == "synclogs" ]; then
         docker-sync logs -f
     fi
 elif [ "$1" == "bash" ]; then
-    NAME=$(docker ps --format '{{.Image}}' | grep $2)
-    docker exec -it $NAME  bash
+    NAME=$(docker ps --format '{{.Names}}')
+    #
+    arr=($NAME)
+    PS3='Choose a container : '
+    select opt in "${arr[@]}"
+    do
+        case $opt in
+            *) docker exec -it $opt bash
+            break;;
+        esac
+    done
 elif [ "$1" == "stop" ]; then
     if [ "$(uname)" == "Darwin" ]; then
         # Do something under Mac OS X platform
