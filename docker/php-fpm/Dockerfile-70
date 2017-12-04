@@ -1,0 +1,72 @@
+# We'll start from a ubuntu xenial
+FROM debian:stable-slim
+
+# Install base packages
+RUN \
+  apt-get update && \
+  apt-get install --no-install-recommends -y \
+  curl \
+  wget \
+  acl \
+  apt-transport-https \
+  lsb-release \
+  sudo \
+  locales \
+  ca-certificates \
+  vim \
+  git \
+  mysql-client
+
+RUN apt-get install apt-transport-https lsb-release ca-certificates
+
+RUN \
+  apt-get update && \
+  apt-get install --no-install-recommends -y \
+  nginx \
+  php-fpm \
+  php-mysql \
+  php-gd \
+  php-dev \
+  php-curl \
+  php-cli \
+  php-intl \
+  php-json \
+  php-common \
+  php-mcrypt \
+  php-common \
+  php-xml \
+  php-mbstring \
+  php-xdebug \
+  php-zip
+
+
+# Additional PHP config
+ADD ./conf/php.ini /usr/local/etc/php/fpm/conf.d
+RUN rm -rf /etc/php/fpm/pool.d/*
+ADD ./conf/www.conf /etc/php/fpm/pool.d/
+ADD conf/xdebug.tpl.conf  /etc/php/fpm/conf.d/xdebug.tpl.conf
+ADD conf/xdebug.tpl.conf  /etc/php/cli/conf.d/xdebug.tpl.conf
+RUN rm -f /etc/php//fpm/conf.d/20-xdebug.ini
+RUN rm -f /etc/php//cli/conf.d/20-xdebug.ini
+RUN echo 'export PHP_IDE_CONFIG="serverName=app"' >> ~/.bashrc
+RUN echo 'export PHP_IDE_CONFIG="serverName=app"' >> /var/www/.bashrc
+RUN mkdir /run/php
+
+# Timezone
+RUN rm /etc/localtime
+RUN ln -s /usr/share/zoneinfo/Europe/Paris /etc/localtime
+
+# Install Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+RUN mkdir -p /var/www/.composer
+RUN chmod -Rf 777 /var/www/.composer
+
+# Used for CMS
+# this one for CLI
+ENV app_ENVIRONMENT local
+
+WORKDIR /var/www
+
+CMD ["php-fpm7.0", "-F"]
+
+EXPOSE 9000

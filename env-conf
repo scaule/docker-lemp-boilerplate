@@ -1,2 +1,3 @@
 APPLICATION_NAME=default
-PLUGINS=mailcatcher
+#PLUGINS=mailcatcher
+PHP_VERSION=71

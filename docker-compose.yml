@@ -12,7 +12,7 @@ services:
         container_name: ${APPLICATION_NAME}_php
         build:
           context: docker/php-fpm
-          dockerfile: "Dockerfile"
+          dockerfile: "Dockerfile-${PHP_VERSION}"
         expose:
           - "9000"
 
