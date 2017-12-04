@@ -10,8 +10,10 @@ Install docker-compose
 
 Install Docker for Mac : https://store.docker.com/editions/community/docker-ce-desktop-mac
 
-Install Docker Sync : ```gem install docker-sync```
-
+Use command to install docker sync : 
+ ```
+ ./docker.sh install_dockersync
+  ```
 ## Installation
 ##On mac install docker-sync : 
 ```
@@ -43,4 +45,25 @@ Run the docker stack:
 
 ```
 ./docker.sh start
+```
+## Connect to container bash 
+```
+./docker.sh bash
+```
+## Debug
+```
+./docker.sh xdebug enable
+```
+
+### Enable xdebug
+
+
+```
+./docker.sh xdebug enable
+```
+
+### Disable xdebug
+
+```
+./docker.sh xdebug enable
 ```

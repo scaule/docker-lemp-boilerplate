@@ -22,7 +22,7 @@ print_style () {
 
 display_options () {
     printf "Available options:\n";
-    print_style "   install" "info"; printf "\t\t ONLY MAC Installs docker-sync gem on the host machine.\n"
+    print_style "   install_dockersync" "info"; printf "\t\t ONLY MAC Installs docker-sync gem on the host machine.\n"
     print_style "   init" "info"; printf "\t\t Initialize docker project.\n"
     print_style "   start" "info"; printf "\t\t Installs docker-sync gem on the host machine.\n"
     print_style "   synclogs" "info"; printf "\t\t For mac get synchro logs.\n"
@@ -69,7 +69,7 @@ if [ "$1" == "init" ] ; then
     done
 
     echo $"COMPOSE_FILE=$composeFiles" >> .env
-elif [ "$1" == "install" ]; then
+elif [ "$1" == "install_dockersync" ]; then
     if [ "$(uname)" == "Darwin" ]; then
         print_style "Installing docker-sync\n" "info"
         gem install docker-sync
