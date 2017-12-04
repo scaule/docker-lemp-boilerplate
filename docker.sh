@@ -64,7 +64,7 @@ if [ "$1" == "init" ] ; then
     #Now build compose file for each plugins
     for plugin in $(echo $PLUGINS | tr "/" "\n")
     do
-      composeFiles="$composeFiles:plugins/docker-compose.$plugin.yml"
+      composeFiles="$composeFiles:plugins/$plugin/docker-compose.yml"
     done
 
     echo $"COMPOSE_FILE=$composeFiles" >> .env

@@ -1,2 +1,2 @@
 APPLICATION_NAME=default
-#PLUGINS=mailcatcher
+PLUGINS=mailcatcher
