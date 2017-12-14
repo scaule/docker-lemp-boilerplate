@@ -1,0 +1,47 @@
+# =====================================
+#
+# Add Stack elk
+#
+# =====================================
+version: "3"
+services:
+    elasticsearch:
+        container_name: ${APPLICATION_NAME}_elasticsearch
+        image: ${APPLICATION_NAME}_elasticsearch
+        build:
+            context: docker/elk/elasticsearch
+        volumes:
+            - ./conf/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+            - ./conf/elasticsearch/data:/usr/share/elasticsearch/data
+        ports:
+            - "9200:9200"
+            - "9300:9300"
+        environment:
+            ES_JAVA_OPTS: "-Xmx256m -Xms256m"
+
+    logstash:
+        container_name: ${APPLICATION_NAME}_logstash
+        image: ${APPLICATION_NAME}_logstash
+        build:
+            context: docker/elk/logstash
+        volumes:
+            - ./conf/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+            - ./conf/logstash/pipeline:/usr/share/logstash/pipeline
+        ports:
+            - "9600:9600"
+            - "5044:5044"
+        environment:
+            LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+        depends_on:
+            - elasticsearch
+    kibana:
+        container_name: ${APPLICATION_NAME}_kibana
+        image: ${APPLICATION_NAME}_kibana
+        build:
+            context: docker/elk/kibana
+        volumes:
+            - ./conf/kibana/config/:/usr/share/kibana/config
+        ports:
+            - "5601:5601"
+        depends_on:
+            - elasticsearch
