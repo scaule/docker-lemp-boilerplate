@@ -9,10 +9,10 @@ services:
         container_name: ${APPLICATION_NAME}_elasticsearch
         image: ${APPLICATION_NAME}_elasticsearch
         build:
-            context: docker/elk/elasticsearch
+            context: plugins/elk/conf/elasticsearch
         volumes:
-            - ./conf/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
-            - ./conf/elasticsearch/data:/usr/share/elasticsearch/data
+            - ./plugins/elk/conf/elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+            - ./plugins/elk/conf/elasticsearch/data:/usr/share/elasticsearch/data
         ports:
             - "9200:9200"
             - "9300:9300"
@@ -23,10 +23,10 @@ services:
         container_name: ${APPLICATION_NAME}_logstash
         image: ${APPLICATION_NAME}_logstash
         build:
-            context: docker/elk/logstash
+            context: plugins/elk/conf/logstash
         volumes:
-            - ./conf/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
-            - ./conf/logstash/pipeline:/usr/share/logstash/pipeline
+            - ./plugins/elk/conf/logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml
+            - ./plugins/elk/conf/logstash/pipeline:/usr/share/logstash/pipeline
         ports:
             - "9600:9600"
             - "5044:5044"
@@ -38,9 +38,9 @@ services:
         container_name: ${APPLICATION_NAME}_kibana
         image: ${APPLICATION_NAME}_kibana
         build:
-            context: docker/elk/kibana
+            context: plugins/elk/conf/kibana
         volumes:
-            - ./conf/kibana/config/:/usr/share/kibana/config
+            - ./plugins/elk/conf/kibana/config/:/usr/share/kibana/config
         ports:
             - "5601:5601"
         depends_on:
